@@ -37,7 +37,7 @@ const App = () => {
   const handleAddToCart = (clickedItem: CartItemType) => {
     setCartItems(prev => {
       // 1. Is the Item already added in the Cart?
-      const isItemInCart = prev.find(item => item.id == clickedItem.id);
+      const isItemInCart = prev.find(item => item.id === clickedItem.id);
 
       if(isItemInCart){
         return prev.map(item => 
@@ -52,7 +52,19 @@ const App = () => {
     })
   };
 
-  const handleRemoveFromCart = () => null;
+  const handleRemoveFromCart = (itemId:number) => {
+    setCartItems(prev => 
+      prev.reduce((ack, item) => {
+        if(item.id === itemId){
+          if(item.amount === 1) return ack;
+          return [...ack, {...item, amount:item.amount - 1}];
+        }
+        else{
+          return [...ack, item];
+        }
+      },[] as CartItemType[])
+    );
+  };
 
   if(isLoading) return <LinearProgress/>;
   if(error) return <div>Something went wrong ...</div>
