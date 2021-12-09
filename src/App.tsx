@@ -1,6 +1,6 @@
 import {ContextType, useState} from 'react';
 import {useQuery} from 'react-query';
-//Components
+//Components for real
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
 import Drawer from '@material-ui/core/Drawer';
